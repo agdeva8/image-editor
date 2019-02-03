@@ -10,15 +10,14 @@ quality = [50];
 lq = length(quality);
 
 for qi = 1:lq
-    [row coln channels] = size(im_orig);
+    [row1 coln1 channels] = size(im_orig);
 
-    row = ceil(row/8)*8;
-    coln = ceil(coln/8)*8;
+    row = floor(row1/8)*8;
+    coln = floor(coln1/8)*8;
 
-    I = im_orig(row,coln,channels);
-    I(1:row,1:coln,1:channels) = im_orig;
-
-
+    I = zeros(row,coln,channels);
+    I = im_orig(1:row,1:coln,:);
+    
     total_new_len = 0;
     for ch_itr = 1:channels
         file_name = 'compressed_image_'+string(ch_itr)+'.mat';
